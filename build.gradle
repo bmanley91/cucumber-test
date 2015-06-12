@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.netflix.nebula:gradle-info-plugin:1.9.5"
+        classpath "com.github.samueltbrown:gradle-cucumber-plugin:0.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'com.github.samueltbrown.cucumber'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'project-reports'
+
+apply from: 'gradle/idea/idea.gradle'
+
+dependencies {
+    compile (
+        "info.cukes:cucumber-java:1.2.2",
+        "org.seleniumhq.selenium:selenium-java:2.44.0",
+        'junit:junit:4.11'
+
+    )
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs 'src/test/step-definitions',
+                    'src/test/java'
+
+        }
+    }
+}
+
+
+project.tasks.cucumber.dependsOn build
+
+cucumber {
+    formats = [
+            'pretty',
+            'json:build/report/cucumber.json',
+            'junit:build/report/cucumber.xml',
+            'html:build/report/cucumber/'
+    ]
+
+    featureDirs = ['src/test/features']
+
+    sourceSets = [project.sourceSets.test]
+}
