@@ -32,16 +32,17 @@ public class CommercehubCareersPage extends BrowserPage {
     public void assertPostPresent(String jobTitle) {
         boolean pass = false;
 
-        List<WebElement> elements = driver.findElements(By.xpath(""));
-
-        for (WebElement element : elements) {
-            if (element.getText().equals(jobTitle)) {
-                pass = true;
-            }
-        }
-
-        if (!pass) {
-            Assert.fail("Job Title " + jobTitle + " was not present on the page.");
-        }
+        driver.findElement(By.linkText(jobTitle));
+//        List<WebElement> elements = driver.findElements(By.linkText(jobTitle));
+//
+//        for (WebElement element : elements) {
+//            if (element.getText().equals(jobTitle)) {
+//                pass = true;
+//            }
+//        }
+//
+//        if (!pass) {
+//            Assert.fail("Job Title " + jobTitle + " was not present on the page.");
+//        }
     }
 }
