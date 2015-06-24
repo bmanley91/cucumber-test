@@ -30,19 +30,11 @@ public class CommercehubCareersPage extends BrowserPage {
      * @param jobTitle - the job title to assert on
      */
     public void assertPostPresent(String jobTitle) {
-        boolean pass = false;
 
-        driver.findElement(By.linkText(jobTitle));
-//        List<WebElement> elements = driver.findElements(By.linkText(jobTitle));
-//
-//        for (WebElement element : elements) {
-//            if (element.getText().equals(jobTitle)) {
-//                pass = true;
-//            }
-//        }
-//
-//        if (!pass) {
-//            Assert.fail("Job Title " + jobTitle + " was not present on the page.");
-//        }
+        WebElement post = driver.findElement(By.linkText(jobTitle));
+
+        if (post == null) {
+            Assert.fail("Post not present!");
+        }
     }
 }
